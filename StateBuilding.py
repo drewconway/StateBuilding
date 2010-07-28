@@ -341,12 +341,13 @@ class Environment(object):
         model_data["agent_data"]=agent_data
         if csv_path is not None:
             fn=agent_data[0].keys()
-            fn.append("threshold")
+            fn.extend(["threshold","threshold_met"])
             writer=csv.DictWriter(open(csv_path, "w"), fieldnames=fn)
             writer.writerow(dict([(a,a) for a in fn]))
             for a in agent_data.keys():
                 row=agent_data[a]
                 row["threshold"]=model_data["threshold"]
+                row["threshold_met"]=model_data["threshold_met"]
                 writer.writerow(row)
         return model_data
 
