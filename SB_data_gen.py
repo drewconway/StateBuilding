@@ -110,7 +110,7 @@ def main():
         E_PAR=SB.Environment(population=num_agents,degree_seq=par_ds)
         E_PAR.get_data(data_dir+"/"+sub_dirs["par"]+"/"+str(r)+"_"+sub_dirs["par"]+".csv")
         
-        ### Group 5: Pareto degree distribution random networks ###
+        ### Group 5: Power-law degree distribution random networks ###
         pl_ds=nx.create_degree_sequence(num_agents,nx.utils.powerlaw_sequence)
         E_PL=SB.Environment(population=num_agents,degree_seq=pl_ds)
         E_PL.get_data(data_dir+"/"+sub_dirs["pl"]+"/"+str(r)+"_"+sub_dirs["pl"]+".csv")
