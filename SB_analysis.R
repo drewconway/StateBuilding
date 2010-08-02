@@ -11,7 +11,10 @@
 
 # Copyright (c) 2010, under the Simplified BSD License.  
 # For more information on FreeBSD see: http://www.opensource.org/licenses/bsd-license.php
-# All rights reserved.                                                         
+# All rights reserved.
+
+# To replicate data you must first unzip the ABM_data.zip file
+# untar("ABM_data.zip",compressed="gzip")
 
 # Load libraries and data
 library(ggplot2)
@@ -40,7 +43,7 @@ dummy.cols<-as.vector(c(sapply(agent.types,function(s) {paste("Is",sub("-","",s)
 # binom dummies
 binom.dummy.list<-list()
 for(i in 0:4){
-    binom.dummy.list[[i+1]]<-sapply(binom$type,function(t) ifelse(t==i,1,0))
+    binom.dummy.list[[i+1]]<-ifelse(binom$type==i,1,0)
 }
 binom.dummy.df<-as.data.frame(do.call("cbind",binom.dummy.list))
 binom.dummy.df<-transform(binom.dummy.df,id=1:nrow(binom))
@@ -50,7 +53,7 @@ binom<-merge(binom,binom.dummy.df)
 # Pareto dummies
 pareto.dummy.list<-list()
 for(i in 0:4){
-    pareto.dummy.list[[i+1]]<-sapply(pareto$type,function(t) ifelse(t==i,1,0))
+    pareto.dummy.list[[i+1]]<-ifelse(pareto$type==i,1,0)
 }
 pareto.dummy.df<-as.data.frame(do.call("cbind",pareto.dummy.list))
 pareto.dummy.df<-transform(pareto.dummy.df,id=1:nrow(pareto))
@@ -60,7 +63,7 @@ pareto<-merge(pareto,pareto.dummy.df)
 # Power-law dummies
 power.dummy.list<-list()
 for(i in 0:4){
-    power.dummy.list[[i+1]]<-sapply(power$type,function(t) ifelse(t==i,1,0))
+    power.dummy.list[[i+1]]<-ifelse(power$type==i,1,0)
 }
 power.dummy.df<-as.data.frame(do.call("cbind",power.dummy.list))
 power.dummy.df<-transform(power.dummy.df,id=1:nrow(power))
@@ -70,7 +73,7 @@ power<-merge(power,power.dummy.df)
 # Preferential attachment dummies
 pref.dummy.list<-list()
 for(i in 0:4){
-    pref.dummy.list[[i+1]]<-sapply(pref$type,function(t) ifelse(t==i,1,0))
+    pref.dummy.list[[i+1]]<-ifelse(pref$type==i,1,0)
 }
 pref.dummy.df<-as.data.frame(do.call("cbind",pref.dummy.list))
 pref.dummy.df<-transform(pref.dummy.df,id=1:nrow(pref))
@@ -80,7 +83,7 @@ pref<-merge(pref,pref.dummy.df)
 # Uniform dummies
 uniform.dummy.list<-list()
 for(i in 0:4){
-    uniform.dummy.list[[i+1]]<-sapply(uniform$type,function(t) ifelse(t==i,1,0))
+    uniform.dummy.list[[i+1]]<-ifelse(uniform$type==i,1,0)
 }
 uniform.dummy.df<-as.data.frame(do.call("cbind",uniform.dummy.list))
 uniform.dummy.df<-transform(uniform.dummy.df,id=1:nrow(uniform))
@@ -97,54 +100,52 @@ dir.create(paste(img.dir,"/",dd.dir,sep=""))
 setwd(paste(img.dir,"/",dd.dir,sep=""))
 
 png("binom_dd.png",height=600,width=600,res=100)
-binom.dd<-ggplot(binom,aes(x=num_neighbors))+geom_histogram(aes(fill="Degree Distribution"),binwidth=1)+
-    scale_fill_manual(values=c("Degree Distribution"="darkred"),name="")+
-    opts(title="Degree Distribution for Binomial Networks")+
-    xlab("Degree")+ylab("Frequency")
+binom.dd<-ggplot(binom,aes(x=num_neighbors))+stat_bin(aes(fill="black",colour="gainsboro"),binwidth=1)+
+    scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+    scale_x_continuous(limits=c(0,100))
 print(binom.dd)
 dev.off()
 
 png("pareto_dd.png",height=600,width=600,res=100)
-pareto.dd<-ggplot(pareto,aes(x=num_neighbors))+geom_histogram(aes(fill="Degree Distribution"),binwidth=1)+
-    scale_fill_manual(values=c("Degree Distribution"="darkred"),name="")+
-    opts(title="Degree Distribution for Pareto Networks")+
-    xlab("Degree")+ylab("Frequency")
+pareto.dd<-ggplot(pareto,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
+    scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+     scale_x_continuous(limits=c(0,100))
 print(pareto.dd)
 dev.off()
 
 png("power_dd.png",height=600,width=600,res=100)
-power.dd<-ggplot(power,aes(x=num_neighbors))+geom_histogram(aes(fill="Degree Distribution"),binwidth=1)+
-    scale_fill_manual(values=c("Degree Distribution"="darkred"),name="")+
-    opts(title="Degree Distribution for Power-law Networks")+
-    xlab("Degree")+ylab("Frequency")
+power.dd<-ggplot(power,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
+    scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+     scale_x_continuous(limits=c(0,100))
 print(power.dd)
 dev.off()
 
 png("pref_dd.png",height=600,width=600,res=100)
-pref.dd<-ggplot(pref,aes(x=num_neighbors))+geom_histogram(aes(fill="Degree Distribution"),binwidth=1)+
-    scale_fill_manual(values=c("Degree Distribution"="darkred"),name="")+
-    opts(title="Degree Distribution for Wealth-based\nPreferential Attachment Networks")+
-    xlab("Degree")+ylab("Frequency")
+pref.dd<-ggplot(pref,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
+    scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+     scale_x_continuous(limits=c(0,100))
 print(pref.dd)
 dev.off()
 
 png("uniform_dd.png",height=600,width=600,res=100)
-uniform.dd<-ggplot(uniform,aes(x=num_neighbors))+geom_histogram(aes(fill="Degree Distribution"),binwidth=1)+
-    scale_fill_manual(values=c("Degree Distribution"="darkred"),name="")+
-    opts(title="Degree Distribution for Uniform Networks")+
-    xlab("Degree")+ylab("Frequency")
+uniform.dd<-ggplot(uniform,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
+    scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+     scale_x_continuous(limits=c(0,100))
 print(uniform.dd)
 dev.off()
 
 # Return to root directory
 setwd("../..")
 
-# Gridded plots of agent wealth by contributions levels, disaggregated by agent
-# type and provision point
-wc.dir<-"wealth_contrib"
-dir.create(paste(img.dir,"/",wc.dir,sep=""))
-setwd(paste(img.dir,"/",wc.dir,sep=""))
-
+# Bin plots for agent contribution levels by agent type and provision point
+tp.dir<-"contrib_bins"
+dir.create(paste(img.dir,"/",tp.dir,sep=""))
+setwd(paste(img.dir,"/",tp.dir,sep=""))
 
 # First create labeler for ggplot2
 grid.lab<-function(variable, value) {
@@ -158,56 +159,161 @@ grid.lab<-function(variable, value) {
     }
 }
 
+png("uniform_tp.png",height=450,width=1000,res=100)
+uniform.tp<-ggplot(uniform,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
+    scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Uniform Networks")+theme_bw()
+print(uniform.tp)
+dev.off()
+
+png("pareto_tp.png",height=450,width=1000,res=100)
+pareto.tp<-ggplot(pareto,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
+    scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Pareto Networks")+theme_bw()
+print(pareto.tp)
+dev.off()
+
+png("binom_tp.png",height=450,width=1000,res=100)
+binom.tp<-ggplot(binom,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
+    scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Binomial Networks")+theme_bw()
+print(binom.tp)
+dev.off()
+
+png("pref_tp.png",height=450,width=1000,res=100)
+pref.tp<-ggplot(pref,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
+    scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Preferential Attachment Networks")+theme_bw()
+print(pref.tp)
+dev.off()
+
+png("power_tp.png",height=450,width=1000,res=100)
+power.tp<-ggplot(power,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
+    scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
+    facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Power-law Networks")+theme_bw()
+print(power.tp)
+dev.off()
+
+# Return to root directory
+setwd("../..")
+
+# 2D bin plots of agent types and wealth
+bn.dir<-"type_bins"
+dir.create(paste(img.dir,"/",bn.dir,sep=""))
+setwd(paste(img.dir,"/",bn.dir,sep=""))
+
+png("uniform_bn.png",height=400,width=1000,res=100)
+uniform.bn<-ggplot(uniform,aes(x=type,y=wealth))+stat_bin2d(aes(binwidth=20,colour="black"))+coord_flip()+
+    scale_x_continuous(breaks=0:4,labels=agent.types)+ylab("Agent Wealth Frequency")+xlab("Agent Type Frequency")+
+    opts(title="Two-Dimensional Histogram of Agent Types and Wealth for Uniform Networks")+
+    scale_fill_gradient(low="gainsboro",high="black",name="Agent Counts",breaks=seq(2000,14000,by=2000))+
+    scale_y_continuous(breaks=seq(0,120,20))+scale_colour_grey(legend=FALSE)+theme_bw()
+print(uniform.bn)
+dev.off()
+
+png("pareto_bn.png",height=400,width=1000,res=100)
+pareto.bn<-ggplot(pareto,aes(x=type,y=wealth))+stat_bin2d(aes(binwidth=20,colour="black"))+coord_flip()+
+    scale_x_continuous(breaks=0:4,labels=agent.types)+ylab("Agent Wealth Frequency")+xlab("Agent Type Frequency")+
+    opts(title="Two-Dimensional Histogram of Agent Types and Wealth for Uniform Networks")+
+    scale_fill_gradient(low="gainsboro",high="black",name="Agent Counts",breaks=seq(2000,14000,by=2000))+
+    scale_y_continuous(breaks=seq(0,120,20))+scale_colour_grey(legend=FALSE)+theme_bw()
+print(pareto.bn)
+dev.off()
+
+png("binom_bn.png",height=400,width=1000,res=100)
+binom.bn<-ggplot(binom,aes(x=type,y=wealth))+stat_bin2d(aes(binwidth=20,colour="black"))+coord_flip()+
+    scale_x_continuous(breaks=0:4,labels=agent.types)+ylab("Agent Wealth Frequency")+xlab("Agent Type Frequency")+
+    opts(title="Two-Dimensional Histogram of Agent Types and Wealth for Uniform Networks")+
+    scale_fill_gradient(low="gainsboro",high="black",name="Agent Counts",breaks=seq(2000,14000,by=2000))+
+    scale_y_continuous(breaks=seq(0,120,20))+scale_colour_grey(legend=FALSE)+theme_bw()
+print(binom.bn)
+dev.off()
+
+png("pref_bn.png",height=400,width=1000,res=100)
+pref.bn<-ggplot(pref,aes(x=type,y=wealth))+stat_bin2d(aes(binwidth=20,colour="black"))+coord_flip()+
+    scale_x_continuous(breaks=0:4,labels=agent.types)+ylab("Agent Wealth Frequency")+xlab("Agent Type Frequency")+
+    opts(title="Two-Dimensional Histogram of Agent Types and Wealth for Uniform Networks")+
+    scale_fill_gradient(low="gainsboro",high="black",name="Agent Counts",breaks=seq(2000,14000,by=2000))+
+    scale_y_continuous(breaks=seq(0,120,20))+scale_colour_grey(legend=FALSE)+theme_bw()
+print(pref.bn)
+dev.off()
+
+png("power_bn.png",height=400,width=1000,res=100)
+power.bn<-ggplot(power,aes(x=type,y=wealth))+stat_bin2d(aes(binwidth=20,colour="black"))+coord_flip()+
+    scale_x_continuous(breaks=0:4,labels=agent.types)+ylab("Agent Wealth Frequency")+xlab("Agent Type Frequency")+
+    opts(title="Two-Dimensional Histogram of Agent Types and Wealth for Uniform Networks")+
+    scale_fill_gradient(low="gainsboro",high="black",name="Agent Counts",breaks=seq(2000,14000,by=2000))+
+    scale_y_continuous(breaks=seq(0,120,20))+scale_colour_grey(legend=FALSE)+theme_bw()
+print(power.bn)
+dev.off()
+
+# Return to root directory
+setwd("../..")
+
+
+# Gridded plots of agent wealtha and contributions levels, by agent type and provision point
+wc.dir<-"wealth_contrib"
+dir.create(paste(img.dir,"/",wc.dir,sep=""))
+setwd(paste(img.dir,"/",wc.dir,sep=""))
+
 
 png("uniform_wc.png",width=1000,height=700,res=100)
 uniform.wc<-ggplot(subset(uniform,uniform$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
-    scale_colour_manual(values=c("darkred","darkblue"),legend=FALSE)+scale_alpha(legend=FALSE)+
+    scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level by Wealth for Uniform Networks\n[Agent Types][Provision Point]")+
-    facet_grid(threshold_met~type,labeller=grid.lab)
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Uniform Networks")+
+    facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(uniform.wc)
 dev.off()
 
 png("pareto_wc.png",width=1000,height=700,res=100)
 pareto.wc<-ggplot(subset(pareto,pareto$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
-    scale_colour_manual(values=c("darkred","darkblue"),legend=FALSE)+scale_alpha(legend=FALSE)+
+    scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level by Wealth for Pareto Networks\n[Agent Types][Provision Point]")+
-    facet_grid(threshold_met~type,labeller=grid.lab)
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Pareto Networks")+
+    facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(pareto.wc)
 dev.off()
 
 png("binom_wc.png",width=1000,height=700,res=100)
 binom.wc<-ggplot(subset(binom,binom$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
-    scale_colour_manual(values=c("darkred","darkblue"),legend=FALSE)+scale_alpha(legend=FALSE)+
+    scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level by Wealth for Binomial Networks\n[Agent Types][Provision Point]")+
-    facet_grid(threshold_met~type,labeller=grid.lab)
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Binomial Networks")+
+    facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(binom.wc)
 dev.off()
 
 png("pref_wc.png",width=1000,height=700,res=100)
 pref.wc<-ggplot(subset(pref,pref$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
-    scale_colour_manual(values=c("darkred","darkblue"),legend=FALSE)+scale_alpha(legend=FALSE)+
+    scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level by Wealth for Preferential Attachment Networks\n[Agent Types][Provision Point]")+
-    facet_grid(threshold_met~type,labeller=grid.lab)
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Prefential Attachment Networks")+
+    facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(pref.wc)
 dev.off()
 
 png("power_wc.png",width=1000,height=700,res=100)
 power.wc<-ggplot(subset(power,power$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
-    scale_colour_manual(values=c("darkred","darkblue"),legend=FALSE)+scale_alpha(legend=FALSE)+
+    scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level by Wealth for Uniform Networks\n[Agent Types][Provision Point]")+
-    facet_grid(threshold_met~type,labeller=grid.lab)
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Power-law Networks")+
+    facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(power.wc)
 dev.off()
+
+# Return to root
+setwd("../..")
 
 #### MODEL ESTIMATES ####
 
