@@ -110,7 +110,7 @@ dev.off()
 png("pareto_dd.png",height=600,width=600,res=100)
 pareto.dd<-ggplot(pareto,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
     scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
-    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+    opts(title="Degree Distribution for Pareto Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
      scale_x_continuous(limits=c(0,100))
 print(pareto.dd)
 dev.off()
@@ -118,7 +118,7 @@ dev.off()
 png("power_dd.png",height=600,width=600,res=100)
 power.dd<-ggplot(power,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
     scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
-    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+    opts(title="Degree Distribution for Power-law Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
      scale_x_continuous(limits=c(0,100))
 print(power.dd)
 dev.off()
@@ -126,7 +126,7 @@ dev.off()
 png("pref_dd.png",height=600,width=600,res=100)
 pref.dd<-ggplot(pref,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
     scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
-    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+    opts(title="Degree Distribution for Preferntial Attachment Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
      scale_x_continuous(limits=c(0,100))
 print(pref.dd)
 dev.off()
@@ -134,7 +134,7 @@ dev.off()
 png("uniform_dd.png",height=600,width=600,res=100)
 uniform.dd<-ggplot(uniform,aes(x=num_neighbors))+geom_histogram(aes(fill="black",colour="gainsboro"),binwidth=1)+
     scale_fill_manual(values=c("black"),legend=FALSE)+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
-    opts(title="Degree Distribution for Binomial Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
+    opts(title="Degree Distribution for Uniform Networks")+xlab("Degree")+ylab("Frequency")+theme_bw()+
      scale_x_continuous(limits=c(0,100))
 print(uniform.dd)
 dev.off()
@@ -163,7 +163,7 @@ png("uniform_tp.png",height=450,width=1000,res=100)
 uniform.tp<-ggplot(uniform,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
     scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
     facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
-    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Uniform Networks")+theme_bw()
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\n Provision Point for Uniform Networks")+theme_bw()
 print(uniform.tp)
 dev.off()
 
@@ -171,7 +171,7 @@ png("pareto_tp.png",height=450,width=1000,res=100)
 pareto.tp<-ggplot(pareto,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
     scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
     facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
-    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Pareto Networks")+theme_bw()
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\n Provision Point for Pareto Networks")+theme_bw()
 print(pareto.tp)
 dev.off()
 
@@ -179,7 +179,7 @@ png("binom_tp.png",height=450,width=1000,res=100)
 binom.tp<-ggplot(binom,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
     scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
     facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
-    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Binomial Networks")+theme_bw()
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\n Provision Point for Binomial Networks")+theme_bw()
 print(binom.tp)
 dev.off()
 
@@ -187,7 +187,7 @@ png("pref_tp.png",height=450,width=1000,res=100)
 pref.tp<-ggplot(pref,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
     scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
     facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
-    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Preferential Attachment Networks")+theme_bw()
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\n Provision Point for Preferential Attachment Networks")+theme_bw()
 print(pref.tp)
 dev.off()
 
@@ -195,7 +195,7 @@ png("power_tp.png",height=450,width=1000,res=100)
 power.tp<-ggplot(power,aes(x=contrib))+stat_bin(aes(y=log(..count..),colour="gray"),binwidth=.1)+
     scale_fill_manual(values=c("black"))+scale_colour_manual(values=c("gainsboro"),legend=FALSE)+
     facet_grid(threshold_met~type,labeller=grid.lab)+xlab("Agent Contribution Level")+ylab("log(Frequency)")+
-    opts(title="Histogram of Agent Contribution Level by Agent Type and\nProvision Point for Power-law Networks")+theme_bw()
+    opts(title="Histogram of Agent Contribution Level by Agent Type and\n Provision Point for Power-law Networks")+theme_bw()
 print(power.tp)
 dev.off()
 
@@ -267,7 +267,7 @@ uniform.wc<-ggplot(subset(uniform,uniform$disposition>0),aes(x=wealth,y=contrib)
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Uniform Networks")+
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Uniform Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(uniform.wc)
 dev.off()
@@ -277,7 +277,7 @@ pareto.wc<-ggplot(subset(pareto,pareto$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Pareto Networks")+
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Pareto Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(pareto.wc)
 dev.off()
@@ -287,7 +287,7 @@ binom.wc<-ggplot(subset(binom,binom$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Binomial Networks")+
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Binomial Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(binom.wc)
 dev.off()
@@ -297,7 +297,7 @@ pref.wc<-ggplot(subset(pref,pref$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Prefential Attachment Networks")+
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Prefential Attachment Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(pref.wc)
 dev.off()
@@ -307,7 +307,7 @@ power.wc<-ggplot(subset(power,power$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
     ylab("Agent Contribition Level")+xlab("Agent Wealth")+
-    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\nAgent Types and Provision Point for Power-law Networks")+
+    opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Power-law Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(power.wc)
 dev.off()
@@ -317,29 +317,45 @@ setwd("../..")
 
 #### MODEL ESTIMATES ####
 
-# Probit on provision point
-# Uniform networks
-probit.uniform<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Altruistic+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly,
+# Basic probit on provision point
+probit.uniform<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=uniform)
 summary(probit.uniform)
 
-# Pareto networks
-probit.pareto<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Altruistic+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly,
+probit.pareto<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=pareto)
 summary(probit.pareto)
 
-# Power-law networks
-probit.power<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Altruistic+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly,
+probit.power<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=power)
 summary(probit.power)
 
-# Preferential networks
-probit.pref<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Altruistic+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly,
+probit.pref<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=pref)
 summary(probit.pref)
 
-# Uniform networks
-probit.uniform<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Altruistic+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly,
-    model="probit",data=uniform)
-summary(probit.uniform)
+probit.binom<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+    model="probit",data=binom)
+summary(probit.binom)
+
+# GLM in binomial family with logit link on level of contribution (contrib \in [0,1])
+glm.uniform<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+    family=binomial(link="logit"),data=uniform)
+summary(glm.uniform)
+
+glm.pareto<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+    family=binomial(link="logit"),data=pareto)
+summary(glm.pareto)
+
+glm.power<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+    family=binomial(link="logit"),data=power)
+summary(glm.power)
+
+glm.pref<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+    family=binomial(link="logit"),data=pref)
+summary(glm.pref)
+
+glm.binom<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+    family=binomial(link="logit"),data=binom)
+summary(glm.binom)
 
