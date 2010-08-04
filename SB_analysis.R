@@ -318,44 +318,44 @@ setwd("../..")
 #### MODEL ESTIMATES ####
 
 # Basic probit on provision point
-probit.uniform<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+probit.uniform<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=uniform)
 summary(probit.uniform)
 
-probit.pareto<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+probit.pareto<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=pareto)
 summary(probit.pareto)
 
-probit.power<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+probit.power<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=power)
 summary(probit.power)
 
-probit.pref<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+probit.pref<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=pref)
 summary(probit.pref)
 
-probit.binom<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+probit.binom<-zelig(threshold_met~contrib+wealth+num_neighbors+threshold+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     model="probit",data=binom)
 summary(probit.binom)
 
 # GLM in binomial family with logit link on level of contribution (contrib \in [0,1])
-glm.uniform<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+glm.uniform<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     family=binomial(link="logit"),data=uniform)
 summary(glm.uniform)
 
-glm.pareto<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+glm.pareto<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     family=binomial(link="logit"),data=pareto)
 summary(glm.pareto)
 
-glm.power<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+glm.power<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     family=binomial(link="logit"),data=power)
 summary(glm.power)
 
-glm.pref<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+glm.pref<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     family=binomial(link="logit"),data=pref)
 summary(glm.pref)
 
-glm.binom<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
+glm.binom<-glm(contrib~wealth+num_neighbors+threshold+threshold_met+disposition+Is.Community+Is.Minmatch+Is.Maxmatch+Is.Miserly+Is.Altruistic,
     family=binomial(link="logit"),data=binom)
 summary(glm.binom)
 
