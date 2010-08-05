@@ -256,7 +256,7 @@ dev.off()
 setwd("../..")
 
 
-# Gridded plots of agent wealtha and contributions levels, by agent type and provision point
+# Gridded plots of agent wealth and contributions levels, by agent type and provision point
 wc.dir<-"wealth_contrib"
 dir.create(paste(img.dir,"/",wc.dir,sep=""))
 setwd(paste(img.dir,"/",wc.dir,sep=""))
@@ -266,7 +266,8 @@ png("uniform_wc.png",width=1000,height=700,res=100)
 uniform.wc<-ggplot(subset(uniform,uniform$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
-    ylab("Agent Contribition Level")+xlab("Agent Wealth")+
+    ylab("Agent Contribition Level")+xlab("Agent Wealth")+scale_x_continuous(limits=c(0,30),breaks=seq(0,30,5))+
+    scale_y_continuous(limits=c(0,1),breaks=seq(0,1,.2))+
     opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Uniform Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(uniform.wc)
@@ -276,7 +277,8 @@ png("pareto_wc.png",width=1000,height=700,res=100)
 pareto.wc<-ggplot(subset(pareto,pareto$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
-    ylab("Agent Contribition Level")+xlab("Agent Wealth")+
+    ylab("Agent Contribition Level")+xlab("Agent Wealth")+scale_x_continuous(limits=c(0,30),breaks=seq(0,30,5))+
+    scale_y_continuous(limits=c(0,1),breaks=seq(0,1,.2))+
     opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Pareto Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(pareto.wc)
@@ -286,7 +288,8 @@ png("binom_wc.png",width=1000,height=700,res=100)
 binom.wc<-ggplot(subset(binom,binom$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
-    ylab("Agent Contribition Level")+xlab("Agent Wealth")+
+    ylab("Agent Contribition Level")+xlab("Agent Wealth")+scale_x_continuous(limits=c(0,30),breaks=seq(0,30,5))+
+    scale_y_continuous(limits=c(0,1),breaks=seq(0,1,.2))+
     opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Binomial Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(binom.wc)
@@ -296,7 +299,8 @@ png("pref_wc.png",width=1000,height=700,res=100)
 pref.wc<-ggplot(subset(pref,pref$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
-    ylab("Agent Contribition Level")+xlab("Agent Wealth")+
+    ylab("Agent Contribition Level")+xlab("Agent Wealth")+scale_x_continuous(limits=c(0,30),breaks=seq(0,30,5))+
+    scale_y_continuous(limits=c(0,1),breaks=seq(0,1,.2))+
     opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Prefential Attachment Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(pref.wc)
@@ -306,7 +310,8 @@ png("power_wc.png",width=1000,height=700,res=100)
 power.wc<-ggplot(subset(power,power$disposition>0),aes(x=wealth,y=contrib))+
     geom_jitter(position=position_jitter(height=0,width=4),aes(colour=as.factor(threshold_met),alpha=.5))+
     scale_colour_manual(values=c("gray","gray"),legend=FALSE)+scale_alpha(legend=FALSE)+
-    ylab("Agent Contribition Level")+xlab("Agent Wealth")+
+    ylab("Agent Contribition Level")+xlab("Agent Wealth")+scale_x_continuous(limits=c(0,30),breaks=seq(0,30,5))+
+    scale_y_continuous(limits=c(0,1),breaks=seq(0,1,.2))+
     opts(title="Agent Contribution Level and Wealth for Pareto Networks by\n Agent Types and Provision Point for Power-law Networks")+
     facet_grid(threshold_met~type,labeller=grid.lab)+theme_bw()
 print(power.wc)
