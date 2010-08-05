@@ -246,6 +246,7 @@ class Environment(object):
                             else:
                                 a.set_contrib(random()*a.get_disposition())
                         else:
+                        # Miserly type
                             a.set_contrib(uniform(0.0,0.05)*a.get_disposition())
         # Finally, check to see if threshold has been met
         self.total_contribs=sum(map(lambda a: a.get_contrib()*a.get_wealth(),self.agents))
