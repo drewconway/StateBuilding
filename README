@@ -1,15 +1,15 @@
 StateBuilding.py
 
-Purpose:    Code in support of "Network, collective action, and state building"
+Purpose:    Code in support of "Network, Collective Action, and State Formation"
             
             Code contains two classes: Agent and Environment.
             
             Agent class:        Agent object for computational model described in above paper.
-                                Contains fuctionality for forming agent networks,
+                                Contains functionality for forming agent networks,
                             
             Environment class:  Class object to contain agents, and object in which the 
                                 computational model is run.  Contains functionality
-                                for creating agent networks, adjudicating controbution level,
+                                for creating agent networks, adjudicating contribution level,
                                 and outputting data from runs.
 
 Author:     Drew Conway
